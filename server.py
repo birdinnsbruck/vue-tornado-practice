@@ -15,7 +15,7 @@ class ChatHandler(WebSocketHandler):
         for i in users:
             i_str = i.decode('utf-8')
             user_list.append(i_str)
-        self.write_message(json.dumps(user_list))
+        self.write_message('登录成功')
         #广播新登陆用户
     def on_close(self):
         r.srem('users',self.request.remote_ip)
@@ -33,5 +33,5 @@ if __name__ == "__main__":
     chat_server = tornado.web.Application([
         ('/',ChatHandler)
     ])
-    chat_server.listen(8080)
+    chat_server.listen(8090)
     tornado.ioloop.IOLoop.current().start()
